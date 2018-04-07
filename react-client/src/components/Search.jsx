@@ -22,7 +22,8 @@ class Search extends React.Component {
   }
 
   render() {
-    return (<div>
+    return (
+    <div class="zip">
       Enter a Zip Code <input value={this.state.zip} 
       onChange={this.onChange}/>
       <button onClick={this.search}> Search </button>

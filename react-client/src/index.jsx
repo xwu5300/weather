@@ -4,7 +4,7 @@ import $ from 'jquery';
 import Search from './components/Search.jsx';
 import Weather from './components/Weather.jsx';
 import axios from 'axios';
-import Timestamp from 'react-timestamp';
+import moment from 'moment';
 
 class App extends React.Component {
   constructor(props) {
@@ -14,10 +14,15 @@ class App extends React.Component {
       temp: '',
       sum: '',
       hum: '',
-      date: ''
+      date: '',
+      max: '',
+      min: '',
+      wind: '',
+      icon: ''
     }
     this.onSearch = this.onSearch.bind(this);
     this.getDate = this.getDate.bind(this);
+
   }
 
   componentDidMount() {
@@ -28,15 +33,20 @@ class App extends React.Component {
     // console.log('zip in client index.jsx', zip)  worked
     axios.post('/weather', {zip:zip})
          .then(data => {
-           console.log('data from post yyyyyy', data.data);   //data from server posted
+          //  console.log("data in index", data.data)
            this.setState({
             city: data.data.name,
             temp: Math.round(data.data.main.temp * 9 / 5 - 459.67),
             sum: data.data.weather[0].main,
             hum: data.data.main.humidity,
-            date: this.getDate(data.data.dt)
+            date: this.getDate(data.data.dt),
+            max: Math.round(data.data.main.temp_max * 9 / 5 - 459.67),
+            min: Math.round(data.data.main.temp_min * 9 / 5 - 459.67),
+            wind: Math.round(data.data.wind.speed),
+            icon: data.data.weather[0].icon
            })
          })
+        
     // console.log('check dattttttte', this.getDate())
   }
   
@@ -46,15 +56,16 @@ class App extends React.Component {
     return JSON.stringify(date).slice(1,11)
   }
   
+  
 
   render () {
-    console.log('jason is here', this.state)
     return (<div>
-      <h1>Weather</h1>
-      <div class="infor">
+      <h1></h1>
+      <div className="infor">
         <Weather infor={this.state}/>
       </div>
-      <div  class="search">
+
+      <div  className="search">
         <Search onSearch={this.onSearch}/>
       </div>
 

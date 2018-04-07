@@ -1,23 +1,36 @@
 import React from 'react';
+import Moment from 'moment';
 
 const Weather = (props) => {
-console.log('inside weather component', props)
+// console.log('inside weather component', props)
  return (<div>
-    <div class="city">
-      City: {props.infor.city}
+    <div className="city">
+      {props.infor.city}
     </div>
-    <div class="temp">
-      Temperature: {props.infor.temp}
+    <div className="desc">
+      {props.infor.sum}
+      <img src={"http://openweathermap.org/img/w/" +props.infor.icon + ".png"} />
     </div>
-    <div class="desc">
-      Summary: {props.infor.sum}
+    <div className="temp">
+      {props.infor.temp}°
     </div>
-    <div class="humi">
-      Humidity: {props.infor.hum}
+    <div className="cont">
+      <div className="date">{Moment(props.infor.date).format("MMMM D dddd")}</div> 
+      <div className="range">{props.infor.max}°  -  {props.infor.min}°</div>
     </div>
-    <div class="date">
-      Date: {props.infor.date}
+    <div className="wind">
+      <div className="title">
+        WIND
+      </div>
+      {props.infor.wind}mph
+    </div> 
+    <div className="humi">
+      <div className="title">
+        HUMIDITY
+      </div>
+      {props.infor.hum}%
     </div>
+
   </div>)
 }
 

@@ -1,0 +1,106 @@
+/* http://meyerweb.com/eric/tools/css/reset/ 2. v2.0 | 20110126
+  License: none (public domain)
+*/
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+  display: block;
+}
+body {
+  line-height: 1;
+}
+ol, ul {
+  list-style: none;
+}
+blockquote, q {
+  quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+  content: '';
+  content: none;
+}
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+*：before,
+*after {
+  -webkit-box-sizing: border-box;
+     -moz-box-sizing: border-box;
+          box-sizing: border-box;
+}
+body {
+	font-family: Comic Sans MS, Comic Sans, cursive;
+	background: #D8E4EA;
+    font-size: 20px;
+    text-align: center;
+}
+
+div {
+    padding-top: 20px;
+}
+
+.desc {
+    font-size: 30px;
+    color: grey;
+}
+.temp {
+    font-size: 60px;
+}
+.city {
+    padding: 20px;
+    font-size: 40px;
+    text-align: center;
+}
+
+.date, .range {
+    display: inline-block;
+}   
+.wind, .humi {
+    display: inline-block;
+    width: 50%;
+    padding-bottom: 50px;
+}
+.date {
+    width: 50%;
+    float: left;
+}
+.range {
+    width: 50%;
+    float: right;
+}
+.title {
+    color: grey;
+    padding-bottom: 20px;
+    font-size: 15px;
+}
+
+.search {
+    color: grey;
+}
+
+img {
+    size: 100px;
+}

@@ -22,7 +22,7 @@ app.use(express.static(__dirname + '/../react-client/dist'));
 // });
 
 app.post('/weather', (req, res) => {
-  console.log('requse from server index.js', req.body.zip)
+  // console.log('requse from server index.js', req.body.zip)
   // helper.getWeather(req.body.zip, () => {
   //   // db.save(data, req.body.zip).then(() => 
     
@@ -35,7 +35,7 @@ app.post('/weather', (req, res) => {
   //  res.status(201).send();
    })
    .catch((err) => {
-     console.log('something wrongggggg', err)
+     console.log('getttttttt no data')
    })
   
 })
