@@ -1,34 +1,39 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import $ from 'jquery';
-import List from './components/List.jsx';
+import Search from './components/Search.jsx';
+import Weather from './components/Weather.jsx';
+import axios from 'axios';
 
 class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = { 
-      items: []
+      infor: []
     }
+    this.onSearch = this.onSearch.bind(this);
   }
 
-  componentDidMount() {
-    $.ajax({
-      url: '/items', 
-      success: (data) => {
-        this.setState({
-          items: data
-        })
-      },
-      error: (err) => {
-        console.log('err', err);
-      }
-    });
+  onSearch(zip) {
+    // console.log('zip in client index.jsx', zip)  worked
+    axios.post('/weather', {zip:zip})
+         .then(data => {
+           console.log('data from post yyyyyy', data);   //data from server posted
+           this.setState({infor: data})  
+         })
+
   }
 
   render () {
     return (<div>
-      <h1>Item List</h1>
-      <List items={this.state.items}/>
+      <h1>Weather</h1>
+      <div class="infor">
+        <Weather infor={this.state.infor}/>
+      </div>
+      <div  class="search">
+        <Search onSearch={this.onSearch}/>
+      </div>
+
     </div>)
   }
 }

@@ -1,5 +1,5 @@
 var mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost/test');
+mongoose.connect('mongodb://localhost/weather');
 
 var db = mongoose.connection;
 
@@ -11,21 +11,54 @@ db.once('open', function() {
   console.log('mongoose connected successfully');
 });
 
-var itemSchema = mongoose.Schema({
-  quantity: Number,
-  description: String
+var weatherSchema = mongoose.Schema({
+  "zip_code": Number,
+  "id": Number,
+  "weather": String, 
+  "description": String,
+  "temperature": Number,
+  "pressure": Number,
+  "dt": Number,
+  "name": String
 });
 
-var Item = mongoose.model('Item', itemSchema);
+var Weather = mongoose.model('Weather', weatherSchema);
 
-var selectAll = function(callback) {
-  Item.find({}, function(err, items) {
-    if(err) {
-      callback(err, null);
-    } else {
-      callback(null, items);
-    }
+var save = (item, zipCode) => {
+  console.log('data and zip for database', zipCode)
+  // return Promise.all(
+  //   Weather.find({"zip_code": zipCode}, (err, item) => {
+  //     if (err) {
+  //       console.log('err for saving database', err)
+  //     } else {
+        console.log("is data passssss", item)
+  //       if (!item.length) {
+
+          new Weather({
+            // "zip_code": zipCode,
+            "id": item.id,
+            // "weather": item.weather[0].main, 
+            // "description": item.weather[0].description,
+            // "temperature": item.main.temp,
+            // "pressure": item.main.pressure,
+            // "dt": item.dt,
+            // "name": item.name
+          }).save(function(err) {
+            if (err) { 
+              console.log(' did not saveeeee', err)
+            }
+          })
+    //     }
+    //   }
+    // })
+  // )      
+}
+
+var selectAll = (zipCode, callback) => {
+  Weather.find({zip_code: zipCode}).sort({dt:-1}).limit(1).exec((err, item) => {
+    callback(item);
   });
-};
+}
 
 module.exports.selectAll = selectAll;
+module.exports.save = save;
