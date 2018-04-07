@@ -9,7 +9,7 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = { 
-      infor: []
+      infor: ''
     }
     this.onSearch = this.onSearch.bind(this);
   }
@@ -18,13 +18,14 @@ class App extends React.Component {
     // console.log('zip in client index.jsx', zip)  worked
     axios.post('/weather', {zip:zip})
          .then(data => {
-           console.log('data from post yyyyyy', data);   //data from server posted
-           this.setState({infor: data})  
+           console.log('data from post yyyyyy', data.data);   //data from server posted
+           this.setState({infor: data.data})
          })
-
+    
   }
 
   render () {
+    console.log('jason is here', this.state)
     return (<div>
       <h1>Weather</h1>
       <div class="infor">

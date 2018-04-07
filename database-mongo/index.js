@@ -12,7 +12,7 @@ db.once('open', function() {
 });
 
 var weatherSchema = mongoose.Schema({
-  "zip_code": Number,
+  "zip_code": String,
   "id": Number,
   "weather": String, 
   "description": String,
@@ -25,29 +25,25 @@ var weatherSchema = mongoose.Schema({
 var Weather = mongoose.model('Weather', weatherSchema);
 
 var save = (item, zipCode) => {
-  console.log('data and zip for database', zipCode)
+  // console.log('data and zip for database', zipCode)
   // return Promise.all(
   //   Weather.find({"zip_code": zipCode}, (err, item) => {
   //     if (err) {
   //       console.log('err for saving database', err)
   //     } else {
-        console.log("is data passssss", item)
+        // console.log("is data passssss", item) 
   //       if (!item.length) {
 
           new Weather({
-            // "zip_code": zipCode,
+            "zip_code": zipCode.toString(),
             "id": item.id,
-            // "weather": item.weather[0].main, 
-            // "description": item.weather[0].description,
-            // "temperature": item.main.temp,
-            // "pressure": item.main.pressure,
-            // "dt": item.dt,
-            // "name": item.name
-          }).save(function(err) {
-            if (err) { 
-              console.log(' did not saveeeee', err)
-            }
-          })
+            "weather": item.weather[0].main, 
+            "description": item.weather[0].description,
+            "temperature": Math.round(item.main.temp * 9 / 5 -459.67),
+            "pressure": item.main.pressure,
+            "dt": item.dt,
+            "name": item.name
+          }).save((...args) => {console.log('what are the args in the save', ...args)})
     //     }
     //   }
     // })

@@ -1,7 +1,7 @@
 var express = require('express');
 var bodyParser = require('body-parser');
 var db = require('../database-mongo/index');
-var helper = require('../helpers/getWeather');
+// var helper = require('../helpers/getWeather');
 var app = express();
 var axios = require('axios')
 var api = require('../config.js')
@@ -29,7 +29,7 @@ app.post('/weather', (req, res) => {
   // });
   axios.get(`http://api.openweathermap.org/data/2.5/weather?zip=${req.body.zip},us&appid=${api.API}`)
   .then((data) => {
-    console.log('data from helper function',data.data)
+    // console.log('data from helper function',data.data)
     db.save(data.data, req.body.zip)
     res.send(data.data)
   //  res.status(201).send();
@@ -43,4 +43,3 @@ app.post('/weather', (req, res) => {
 app.listen(3000, function() {
   console.log('listening on port 3000!');
 });
-
