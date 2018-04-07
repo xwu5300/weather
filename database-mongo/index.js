@@ -32,7 +32,7 @@ var save = (item, zipCode) => {
   //       console.log('err for saving database', err)
   //     } else {
         // console.log("is data passssss", item) 
-  //       if (!item.length) {
+        if (!item.length) {
 
           new Weather({
             "zip_code": zipCode.toString(),
@@ -43,18 +43,18 @@ var save = (item, zipCode) => {
             "pressure": item.main.pressure,
             "dt": item.dt,
             "name": item.name
-          }).save((...args) => {console.log('what are the args in the save', ...args)})
-    //     }
+          }).save()
+        }
     //   }
     // })
   // )      
 }
 
-var selectAll = (zipCode, callback) => {
-  Weather.find({zip_code: zipCode}).sort({dt:-1}).limit(1).exec((err, item) => {
-    callback(item);
-  });
-}
+// var selectAll = (zipCode, callback) => {
+//   Weather.find({zip_code: zipCode}).sort({dt:-1}).limit(1).exec((err, item) => {
+//     callback(item);
+//   });
+// }
 
-module.exports.selectAll = selectAll;
+// module.exports.selectAll = selectAll;
 module.exports.save = save;

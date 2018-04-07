@@ -27,6 +27,7 @@
     "mysql": "^2.13.0",
     "react": "^15.4.2",
     "react-dom": "^15.4.2",
+    "react-timestamp": "^4.4.0",
     "request": "^2.85.0",
     "request-promise": "^4.2.2"
   }
